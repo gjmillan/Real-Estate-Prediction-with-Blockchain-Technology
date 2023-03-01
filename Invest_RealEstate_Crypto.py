@@ -18,22 +18,22 @@ property_database = {
         "Property 1",
         "0x507BFb01f2F2e73f428C197bF3059AaC8ef73caf",
         "1000",
-        0.50,
-        "Images/california_beach2.jpeg",
+        1,
+        "Proposal_Images/california_beach2.jpeg",
     ],
     "Property 2": [
         "Property 2",
         "0x0cfCfac45FEcEcbCAF8Fb78D257041Cbb7F6Ca41",
         "1500",
-        1.00,
-        "Images/california_beach3.jpeg",
+        2,
+        "Proposal_Images/california_beach3.jpeg",
     ],
     "Property 3": [
         "Property 3",
         "0x58AcEf7b776A19Eb5536f5c7D189c73bbaF6d313",
         "2000",
-        1.50,
-        "Images/california_beach4.jpeg",
+        3,
+        "Proposal_Images/california_beach4.jpeg",
     ],
 }
 
@@ -90,7 +90,7 @@ estate = st.sidebar.selectbox("Select a Property", property)
 # Create a input field to record the square feet you want to invest
 #sq_ft = st.sidebar.number_input("Square Foot Investment")
 
-st.sidebar.markdown("## Property Name, Square Foot, and Ethereum Address")
+st.sidebar.markdown("## Property Name, Crypto Value, and Ethereum Address")
 
 # Identify the Property
 prop_invest = property_database[estate][0]
@@ -99,13 +99,13 @@ prop_invest = property_database[estate][0]
 st.sidebar.write(prop_invest)
 
 # Identify the Property Square Foot
-sq_ft = property_database[property][3]
+sq_ft = property_database[estate][3]
 
 # Write the Square Foot to the sidebar
 st.sidebar.write(sq_ft)
 
 # Identify the Property Ethereum Address
-property_address = property_database[property][1]
+property_address = property_database[estate][1]
 
 # Write the Property's Ethereum Address to the sidebar
 st.sidebar.write(property_address)
@@ -117,12 +117,11 @@ st.sidebar.markdown("## Total Wage in Ether")
 ################################################################################
 
 # Calculate total `Investment` for the property
-# rate from the candidate database (`candidate_database[person][3]`) by the
 # value of the `hours` variable
-#investment = hours * hourly_rate
+investment = property_database[estate][3]
 
 # # Write the `investment` calculation to the Streamlit sidebar
-#st.sidebar.write(investment)
+st.sidebar.write(investment)
 
 ##########################################
 
