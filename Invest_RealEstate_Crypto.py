@@ -4,7 +4,7 @@ import streamlit as st
 from dataclasses import dataclass
 from typing import Any, List
 from web3 import Web3
-from crypto_wallet import generate_account, get_balance, send_transaction
+from RealEstate_CryptoWallet import generate_account, get_balance, send_transaction
 
 # Updated the port number to 8545 from 7545 in order to ensure the connection to Ganache for transactions
 w3 = Web3(Web3.HTTPProvider("HTTP://127.0.0.1:8545"))
@@ -12,40 +12,40 @@ w3 = Web3(Web3.HTTPProvider("HTTP://127.0.0.1:8545"))
 ################################################################################
 #Real Estate Investment Options
 
-# Database of KryptoJobs2Go candidates including their name, digital address, rating and hourly cost per Ether.
+# Database of Properties including name, digital address, Square Footage and value per Ether.
 property_database = {
     "Property 1": [
-        "Cali 1",
+        "Property 1",
         "0x507BFb01f2F2e73f428C197bF3059AaC8ef73caf",
         "1000",
         0.50,
         "Images/california_beach2.jpeg",
     ],
     "Property 2": [
-        "Cali 2",
+        "Property 2",
         "0x0cfCfac45FEcEcbCAF8Fb78D257041Cbb7F6Ca41",
         "1500",
         1.00,
         "Images/california_beach3.jpeg",
     ],
     "Property 3": [
-        "Cali 3",
+        "Property 3",
         "0x58AcEf7b776A19Eb5536f5c7D189c73bbaF6d313",
         "2000",
         1.50,
         "Images/california_beach4.jpeg",
-    ]
+    ],
 }
 
 # A list of the Properties
-property = ["Cali 1", "Cali 2", "Cali 3"]
+property = ["Property 1", "Property 2", "Property 3"]
 
 def get_property():
     """Display the database of Property Investment information."""
     db_list = list(property_database.values())
 
     for number in range(len(property)):
-        st.image(db_list[number][3], width=200)
+        st.image(db_list[number][4], width=200)
         st.write("Name: ", db_list[number][0])
         st.write("Ethereum Account Address: ", db_list[number][1])
         st.write("Property Square ft: ", db_list[number][2])
@@ -85,18 +85,18 @@ st.sidebar.write(get_balance(w3,account.address))
 ##########################################
 
 # # Create a select box to chose a Property to Invest
-property = st.sidebar.selectbox("Select a Property", property)
+estate = st.sidebar.selectbox("Select a Property", property)
 
 # Create a input field to record the square feet you want to invest
-#hours = st.sidebar.number_input("Square Foot Investment")
+#sq_ft = st.sidebar.number_input("Square Foot Investment")
 
 st.sidebar.markdown("## Property Name, Square Foot, and Ethereum Address")
 
 # Identify the Property
-Cali = property_database[property][0]
+prop_invest = property_database[estate][0]
 
-# Write the Property name to the sidebar
-st.sidebar.write(property)
+# Write the Invested Property name to the sidebar
+st.sidebar.write(prop_invest)
 
 # Identify the Property Square Foot
 sq_ft = property_database[property][3]
@@ -132,7 +132,7 @@ if st.sidebar.button("Send Transaction"):
     st.sidebar.markdown("#### Validated Transaction Hash")
 
     # Write the returned transaction hash to the screen
-    st.sidebar.write(send_transaction(w3, account, property_address, wage))
+    st.sidebar.write(send_transaction(w3, account, property_address, investment))
 
     # Celebrate your successful payment
     st.balloons()
